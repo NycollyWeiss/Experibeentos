@@ -6,9 +6,12 @@
     "include/**/*.js",
     "import/**/*.js",
     "common/**/*.js",
+    "libraries/**/*.js",
     "include/**/*d.ts",
     "import/**/*.d.ts",
     "common/**/*.d.ts",
+    "*.js",
+    "**/*.js",
     "c:\\Users\\Nycol\\.vscode\\extensions\\peterdickx.p5-studio-1.2.9\\assets\\1.11\\p5types\\global.d.ts",
     "c:\\Users\\Nycol\\.vscode\\extensions\\peterdickx.p5-studio-1.2.9\\assets\\1.11\\p5types\\p5helper.d.ts"
   ]
