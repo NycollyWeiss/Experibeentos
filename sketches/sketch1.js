@@ -14,7 +14,7 @@ let velocidade = 3;
 let escala = 50;
 
 
-let centroTrajetoriaX = 610;
+let centroTrajetoriaX = 650;
 let centroTrajetoriaY = 310;
 
 // angulo do bode
@@ -38,10 +38,10 @@ const verde = [93, 177, 91];
 const verdeEscuro = [48, 105, 52];
 
 function preload() {
-  fundo = loadImage('assets/fundobode.jpg');
-  toco = loadImage('assets/toco.png');
-  bode = loadImage('assets/bode.png');
-  mato = loadImage('assets/mato.png');
+  fundo = loadImage('assets/fundobode.png');
+  toco = loadImage('assets/Toco.png');
+  bode = loadImage('assets/Bode .png');
+  mato = loadImage('assets/matinho.png');
   corda = loadImage('assets/Rope.png');
 }
 
@@ -67,8 +67,6 @@ function draw() {
 
   imageMode(CORNER);
   image(fundo, 0, 0, width, height);
-
-  desenharGrade();
 
   let raioPixels = raioMetros * escala;
   let omega = velocidade / raioMetros;
@@ -109,15 +107,15 @@ function draw() {
   image(
     toco,
     centroTrajetoriaX,
-    centroTrajetoriaY,
-    50,
-    50
+    centroTrajetoriaY - 35,
+    100,
+    100
   );
   pop();
 
   push();
   imageMode(CENTER);
-  image(bode, xBode, yBode, 60, 60);
+  image(bode, xBode, yBode, 90, 90);
   pop();
 
   desenharPainelInformacoes(omega, forcaCentripeta);
@@ -204,7 +202,7 @@ function desenharPainelInformacoes(omega, forca) {
   let linhas = [
     ['Massa', `${massa.toFixed(1)} kg`],
     ['Raio', `${raioMetros.toFixed(1)} m`],
-    ['Velocidade', `${velocidade.toFixed(1)} m/s`],
+    ['Velocidade tangencial', `${velocidade.toFixed(1)} m/s`],
     ['Velocidade angular', `${omega.toFixed(2)} rad/s`],
     ['Força centrípeta', `${forca.toFixed(2)} N`]
   ];
