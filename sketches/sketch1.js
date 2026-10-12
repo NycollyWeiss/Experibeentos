@@ -55,7 +55,7 @@ const verde = [93, 177, 91];
 const verdeEscuro = [48, 105, 52];
 
 function preload() {
-  fundoMenu = loadImage('assets/imagem fundo.png');
+  fundoMenu = loadImage('assets/imagem fundo2.jpeg');
   fundoArrasto = loadImage('assets/fundo arrasto.png');
   iconePena = loadImage('assets/pena.png');
   fundo = loadImage('assets/fundobode.png');
@@ -166,14 +166,26 @@ function telaInicio() {
   text(t2, startX + l1 + lBe + l2 / 2, yTitulo);
   pop();
 
-  let btnY = 320;
   let btnW = 240;
   let btnH = 65;
-  let btn1X = width / 2 - 150;
-  let btn2X = width / 2 + 150;
 
-  let hoverExp1 = mouseX > btn1X - btnW / 2 && mouseX < btn1X + btnW / 2 && mouseY > btnY - btnH / 2 && mouseY < btnY + btnH / 2;
-  let hoverExp2 = mouseX > btn2X - btnW / 2 && mouseX < btn2X + btnW / 2 && mouseY > btnY - btnH / 2 && mouseY < btnY + btnH / 2;
+  let btn1X = width * 0.25;
+  let btn2X = width * 0.25;
+
+  let btn1Y = 320;
+  let btn2Y = 410;
+
+  let hoverExp1 =
+  mouseX > btn1X - btnW / 2 &&
+  mouseX < btn1X + btnW / 2 &&
+  mouseY > btn1Y - btnH / 2 &&
+  mouseY < btn1Y + btnH / 2;
+
+let hoverExp2 =
+  mouseX > btn2X - btnW / 2 &&
+  mouseX < btn2X + btnW / 2 &&
+  mouseY > btn2Y - btnH / 2 &&
+  mouseY < btn2Y + btnH / 2;
 
   if (hoverExp1 || hoverExp2) cursor(HAND);
 
@@ -184,19 +196,19 @@ function telaInicio() {
   stroke(hoverExp1 ? '#ffffff' : '#2E7D32');
   strokeWeight(3);
   fill(hoverExp1 ? color(60, 180, 100) : color(76, 175, 80));
-  rect(btn1X, btnY, btnW, btnH, 8);
+  rect(btn1X, btn1Y, btnW, btnH, 8);
   noStroke();
   fill(255);
   textAlign(CENTER, CENTER);
-  text('CENTRÍPETA', btn1X, btnY);
+  text('CENTRÍPETA', btn1X, btn1Y);
 
   stroke(hoverExp2 ? '#ffffff' : '#2E7D32');
   strokeWeight(3);
   fill(hoverExp2 ? color(46, 125, 50) : color(76, 175, 80));
-  rect(btn2X, btnY, btnW, btnH, 8);
+ rect(btn2X, btn2Y, btnW, btnH, 8);
   noStroke();
   fill(255);
-  text('ARRASTO', btn2X, btnY);
+  text('ARRASTO', btn2X, btn2Y);
   pop();
 }
 
@@ -297,6 +309,7 @@ function telaExperimento2() {
 
   let yInicial = 80;
   let yChao = 425;
+  let pixelsPorMetro = 50;
 
   if (simulando) {
     tempo += deltaTime / 1000;
@@ -311,11 +324,11 @@ function telaExperimento2() {
     let b = c;
     vTerm = (m * gravidade) / b;
     tau = m / b;
-    yArrasto = yInicial + vTerm * tempo - vTerm * tau * (1 - exp(-tempo / tau));
+    yArrasto = yInicial + pixelsPorMetro * (vTerm * tempo - vTerm * tau * (1 - exp(-tempo / tau)));
   } else {
     vTerm = sqrt((m * gravidade) / c);
     let argumentoCosh = (gravidade * tempo) / vTerm;
-    yArrasto = yInicial + (sq(vTerm) / gravidade) * log(Math.cosh(argumentoCosh));
+    yArrasto = yInicial + pixelsPorMetro * (sq(vTerm) / gravidade) * log(Math.cosh(argumentoCosh));
   }
 
   let chegouAoChao = false;
@@ -325,7 +338,7 @@ function telaExperimento2() {
   }
 
   // queda Livre pura (sem arrasto)
-  let yLivre = yInicial + 0.5 * gravidade * sq(tempo);
+  let yLivre = yInicial + pixelsPorMetro * (0.5 * gravidade * sq(tempo));
   if (yLivre >= yChao) {
     yLivre = yChao;
   }
@@ -379,7 +392,6 @@ function telaExperimento2() {
   text(`MASSA (m): ${m.toFixed(1)} kg`, width / 2 - 425, 498);
   text(`COEF. (${modoArrasto === 0 ? 'b' : 'c'}): ${c.toFixed(1)}`, width / 2 - 425, 522);
   text(`VEL. TERMINAL: ${vTerm.toFixed(2)} m/s`, width / 2 - 425, 546);
-  text(`TEMPO (t): ${tempo.toFixed(2)} s`, width / 2 - 425, 570);
 
   desenharGrafico(vTerm, tau);
 }
@@ -569,25 +581,37 @@ function mousePressed() {
   userStartAudio();
 
   // menu Inicial (cliques nos botões do canvas)
-  if (tela === 0) {
-    let btnY = 320;
-    let btnW = 240;
-    let btnH = 65;
-    let btn1X = width / 2 - 150;
-    let btn2X = width / 2 + 150;
+ if (tela === 0) {
+  let btnW = 240;
+  let btnH = 65;
 
-    if (mouseX > btn1X - btnW / 2 && mouseX < btn1X + btnW / 2 && mouseY > btnY - btnH / 2 && mouseY < btnY + btnH / 2) {
-      esconderControles();
-      tela = 1;
-      mostrarControlesExp1();
-    }
-    else if (mouseX > btn2X - btnW / 2 && mouseX < btn2X + btnW / 2 && mouseY > btnY - btnH / 2 && mouseY < btnY + btnH / 2) {
-      esconderControles();
-      tela = 2;
-      posicionarControlesArrasto();
-      mostrarControlesArrasto();
-    }
+  let btn1X = width * 0.25;
+  let btn2X = width * 0.25;
+
+  let btn1Y = 320;
+  let btn2Y = 410;
+
+  if (
+    mouseX > btn1X - btnW / 2 &&
+    mouseX < btn1X + btnW / 2 &&
+    mouseY > btn1Y - btnH / 2 &&
+    mouseY < btn1Y + btnH / 2
+  ) {
+    esconderControles();
+    tela = 1;
+    mostrarControlesExp1();
+  } else if (
+    mouseX > btn2X - btnW / 2 &&
+    mouseX < btn2X + btnW / 2 &&
+    mouseY > btn2Y - btnH / 2 &&
+    mouseY < btn2Y + btnH / 2
+  ) {
+    esconderControles();
+    tela = 2;
+    posicionarControlesArrasto();
+    mostrarControlesArrasto();
   }
+}
   if (tela == 1) {
     if (mouseY < 530 || mouseY > 588) {
       return;
