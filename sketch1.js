@@ -55,13 +55,13 @@ const verde = [93, 177, 91];
 const verdeEscuro = [48, 105, 52];
 
 function preload() {
-  fundoMenu = loadImage('assets/imagem fundo2.jpeg');
-  fundoArrasto = loadImage('assets/fundo arrasto.png');
+  fundoMenu = loadImage('assets/imagem_fundo2.jpeg');
+  fundoArrasto = loadImage('assets/fundo_arrasto.png');
   iconePena = loadImage('assets/pena.png');
   fundo = loadImage('assets/fundobode.png');
-  toco = loadImage('assets/Toco.png');
-  bode = loadImage('assets/Bode .png');
-  mato = loadImage('assets/matinho.png');
+  toco = loadImage('assets/toco.png');
+  bode = loadImage('assets/bode.png');
+  mato = loadImage('assets/Matinho.png');
   corda = loadImage('assets/Rope.png');
 
   audiosBode[0] = loadSound('assets/beh1.mp3');
