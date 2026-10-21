@@ -70,7 +70,7 @@ function preload() {
 }
 
 function setup() {
-  canvasPrincipal = createCanvas(windowWidth, 650);
+  canvasPrincipal = createCanvas(900, 650);
   canvasPrincipal.parent('canvas-container');
   textFont('Press Start 2P');
 
@@ -87,7 +87,8 @@ function setup() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, 650);
+  resizeCanvas(
+    950, 650);
   if (tela === 2) {
     posicionarControlesArrasto();
   }
@@ -294,6 +295,7 @@ function telaExperimento2() {
   } else {
     background(40, 40, 50);
   }
+  desenharGrade();
 
   // película escura p/ contraste
   push();
@@ -543,13 +545,13 @@ function posicionarControlesArrasto() {
   let cy = canvasPrincipal.position().y;
   let centroX = width / 2;
 
-  btnVoltar.position(25, 25);
-  sliderMassa.position(centroX - 220, cy + 505);
-  sliderCoef.position(centroX - 220, cy + 555);
+  btnVoltar.position(450, 100);
+  sliderMassa.position(cx + 75, cy + 505);
+  sliderCoef.position(cx + 75, cy + 555);
 
-  btnModoArrasto.position(centroX - 45, cy + 488);
-  btnIniciar.position(centroX - 45, cy + 520);
-  btnResetar.position(centroX - 45, cy + 552);
+  btnModoArrasto.position(cx + 240, cy + 500);
+  btnIniciar.position(cx + 240, cy + 536);
+  btnResetar.position(cx + 240, cy + 572);
 }
 
 function mostrarControlesArrasto() {
