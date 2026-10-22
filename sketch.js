@@ -1,5 +1,4 @@
 let tela = 0;
-let canvas;
 let fundo;
 let tamanhoQuadradinhos = 50;
 let toco;
@@ -32,7 +31,7 @@ let escala = 50;
 
 
 let centroTrajetoriaX = 650;
-let centroTrajetoriaY = 310;
+let centroTrajetoriaY = 260;
 
 // angulo do bode
 let angulo = 0;
@@ -70,8 +69,7 @@ function preload() {
 }
 
 function setup() {
-  canvasPrincipal = createCanvas(900, 650);
-  canvasPrincipal.parent('canvas-container');
+  canvasPrincipal = createCanvas(900, 600);
   textFont('Press Start 2P');
 
 
@@ -84,18 +82,12 @@ function setup() {
 
   criarControles();
   esconderControles();
+
 }
 
-function windowResized() {
-  resizeCanvas(
-    950, 650);
-  if (tela === 2) {
-    posicionarControlesArrasto();
-  }
-}
 
 function draw() {
-  background(15, 20, 30);
+  
 
   switch (tela) {
     case 0:
@@ -295,7 +287,7 @@ function telaExperimento2() {
   } else {
     background(40, 40, 50);
   }
-  desenharGrade();
+  
 
   // película escura p/ contraste
   push();
@@ -389,11 +381,11 @@ function telaExperimento2() {
 
   // telemetria no painel
   fill('#ffffff');
-  textSize(7.5);
+  textSize(9);
   textAlign(LEFT, TOP);
-  text(`MASSA (m): ${m.toFixed(1)} kg`, width / 2 - 425, 498);
-  text(`COEF. (${modoArrasto === 0 ? 'b' : 'c'}): ${c.toFixed(1)}`, width / 2 - 425, 522);
-  text(`VEL. TERMINAL: ${vTerm.toFixed(2)} m/s`, width / 2 - 425, 546);
+  text(`MASSA (m): ${m.toFixed(1)} kg`, 200, 498);
+  text(`COEF. (${modoArrasto === 0 ? 'b' : 'c'}): ${c.toFixed(1)}`,200, 522);
+  text(`VEL. TERMINAL: ${vTerm.toFixed(2)} m/s`, 200, 546);
 
   desenharGrafico(vTerm, tau);
 }
@@ -475,7 +467,7 @@ function criarControles() {
   sliderCoef = createSlider(0.1, 5, 1, 0.1);
 
   btnVoltar = createButton('< VOLTAR');
-  btnVoltar.size(95, 30);
+  btnVoltar.size(85, 30);
   estilizarBotao(btnVoltar);
   btnVoltar.mousePressed(() => {
     esconderControles();
@@ -485,7 +477,7 @@ function criarControles() {
     sliderMassa.removeAttribute('disabled');
     sliderCoef.removeAttribute('disabled');
   });
-
+  
   btnModoArrasto = createButton('MODO: LIN');
   btnModoArrasto.size(95, 26);
   estilizarBotao(btnModoArrasto);
@@ -541,17 +533,14 @@ function estilizarBotao(btn) {
 }
 
 function posicionarControlesArrasto() {
-  let cx = canvasPrincipal.position().x;
-  let cy = canvasPrincipal.position().y;
-  let centroX = width / 2;
+  
+  btnVoltar.position(240, 10);
+  sliderMassa.position(250, 505);
+  sliderCoef.position(250, 555);
 
-  btnVoltar.position(450, 100);
-  sliderMassa.position(cx + 75, cy + 505);
-  sliderCoef.position(cx + 75, cy + 555);
-
-  btnModoArrasto.position(cx + 240, cy + 500);
-  btnIniciar.position(cx + 240, cy + 536);
-  btnResetar.position(cx + 240, cy + 572);
+  btnModoArrasto.position(650, 490);
+  btnIniciar.position(650 , 530);
+  btnResetar.position(650, 572);
 }
 
 function mostrarControlesArrasto() {
@@ -564,9 +553,7 @@ function mostrarControlesArrasto() {
 }
 
 function mostrarControlesExp1() {
-  let cx = canvasPrincipal.position().x;
-  let cy = canvasPrincipal.position().y;
-  btnVoltar.position(25, 25);
+  btnVoltar.position(240, 10);
   btnVoltar.show();
 }
 
@@ -732,10 +719,10 @@ function desenharPainelInformacoes(omega, forca) {
 
 
 function desenharPainelControles() {
-  let x = 18;
+  let x = 30;
   let y = 470;
-  let w = 864;
-  let h = 157;
+  let w = 800;
+  let h = 200;
 
   desenharPlacaMadeira(x, y, w, h);
 
